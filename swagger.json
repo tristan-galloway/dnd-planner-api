@@ -16,6 +16,7 @@
   "paths": {
     "/users/": {
       "get": {
+        "tags": ["Users"],
         "description": "Get all users",
         "responses": {
           "200": {
@@ -44,6 +45,7 @@
         }
       },
       "post": {
+        "tags": ["Users"],
         "description": "Create a new user",
         "requestBody": {
           "required": true,
@@ -69,6 +71,7 @@
     },
     "/users/{id}": {
       "get": {
+        "tags": ["Users"],
         "description": "Get a user by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -79,6 +82,7 @@
         }
       },
       "put": {
+        "tags": ["Users"],
         "description": "Update a user by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -106,6 +110,7 @@
         }
       },
       "delete": {
+        "tags": ["Users"],
         "description": "Delete a user by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -118,6 +123,7 @@
     },
     "/characters/": {
       "get": {
+        "tags": ["Characters"],
         "description": "Get all characters",
         "responses": {
           "200": {
@@ -148,6 +154,7 @@
         }
       },
       "post": {
+        "tags": ["Characters"],
         "description": "Create a new character",
         "requestBody": {
           "required": true,
@@ -178,6 +185,7 @@
     },
     "/characters/{id}": {
       "get": {
+        "tags": ["Characters"],
         "description": "Get a character by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -188,6 +196,7 @@
         }
       },
       "put": {
+        "tags": ["Characters"],
         "description": "Update a character by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -220,6 +229,7 @@
         }
       },
       "delete": {
+        "tags": ["Characters"],
         "description": "Delete a character by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -232,6 +242,7 @@
     },
     "/items/": {
       "get": {
+        "tags": ["Items"],
         "description": "Get all items",
         "responses": {
           "200": {
@@ -256,6 +267,7 @@
         }
       },
       "post": {
+        "tags": ["Items"],
         "description": "Create a new item",
         "requestBody": {
           "required": true,
@@ -280,6 +292,7 @@
     },
     "/items/{id}": {
       "get": {
+        "tags": ["Items"],
         "description": "Get an item by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -290,6 +303,7 @@
         }
       },
       "put": {
+        "tags": ["Items"],
         "description": "Update an item by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -316,6 +330,7 @@
         }
       },
       "delete": {
+        "tags": ["Items"],
         "description": "Delete an item by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -328,6 +343,7 @@
     },
     "/campaigns/": {
       "get": {
+        "tags": ["Campaigns"],
         "description": "Get all campaigns",
         "responses": {
           "200": {
@@ -352,6 +368,7 @@
         }
       },
       "post": {
+        "tags": ["Campaigns"],
         "description": "Create a new campaign",
         "requestBody": {
           "required": true,
@@ -376,6 +393,7 @@
     },
     "/campaigns/{id}": {
       "get": {
+        "tags": ["Campaigns"],
         "description": "Get a campaign by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -386,6 +404,7 @@
         }
       },
       "put": {
+        "tags": ["Campaigns"],
         "description": "Update a campaign by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
@@ -412,6 +431,7 @@
         }
       },
       "delete": {
+        "tags": ["Campaigns"],
         "description": "Delete a campaign by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
