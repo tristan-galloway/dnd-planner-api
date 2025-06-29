@@ -1,0 +1,229 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "DD Planner API",
+    "description": "API documentation for the DD Planner project",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "paths": {
+    "/users/": {
+      "get": {
+        "description": "Get all users",
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "6657e82ded56c2256c29b108"
+                      },
+                      "username": {
+                        "type": "string",
+                        "example": "fit_jane"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "jane@example.com"
+                      },
+                      "avatarUrl": {
+                        "type": "string",
+                        "example": "https://example.com/avatar/jane.jpg"
+                      },
+                      "fitnessGoals": {
+                        "type": "string",
+                        "example": "Build strength and endurance"
+                      },
+                      "friends": {
+                        "type": "array",
+                        "example": [],
+                        "items": {}
+                      },
+                      "routines": {
+                        "type": "array",
+                        "example": [],
+                        "items": {}
+                      },
+                      "joinedAt": {
+                        "type": "string",
+                        "example": "2024-10-01T10:00:00Z"
+                      },
+                      "bio": {
+                        "type": "string",
+                        "example": "Life long runner and HIIT fan"
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "6657e82ded56c2256c29b108"
+                      },
+                      "username": {
+                        "type": "string",
+                        "example": "fit_jane"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "jane@example.com"
+                      },
+                      "avatarUrl": {
+                        "type": "string",
+                        "example": "https://example.com/avatar/jane.jpg"
+                      },
+                      "fitnessGoals": {
+                        "type": "string",
+                        "example": "Build strength and endurance"
+                      },
+                      "friends": {
+                        "type": "array",
+                        "example": [],
+                        "items": {}
+                      },
+                      "routines": {
+                        "type": "array",
+                        "example": [],
+                        "items": {}
+                      },
+                      "joinedAt": {
+                        "type": "string",
+                        "example": "2024-10-01T10:00:00Z"
+                      },
+                      "bio": {
+                        "type": "string",
+                        "example": "Life long runner and HIIT fan"
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
