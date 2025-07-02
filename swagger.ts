@@ -6,11 +6,17 @@ const doc = {
     description: 'API documentation for the DD Planner project',
     version: '1.0.0'
   },
-  host: 'localhost:3000',
-  schemes: ['http'],
+  servers: [
+    { url: 'http://localhost:3000/' },
+    { url: 'https://dnd-planner-api.onrender.com/' }
+  ]
 };
 
 const outputFile = './swagger.json';
-const endpointsFiles = ['./index.ts', './routes/index.ts'];
+const endpointsFiles = [
+  './index.ts',
+  './routes/index.ts',
+  './routes/users.ts',
+];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc);
