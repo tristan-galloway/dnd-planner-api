@@ -5,7 +5,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   profile_img: string;
-  character: string;
+  character: string[]; // Changed to array of strings
 }
 
 const userSchema = new Schema<IUser>({
@@ -13,7 +13,7 @@ const userSchema = new Schema<IUser>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   profile_img: { type: String, required: true },
-  character: { type: String, required: true }
+  character: { type: [String], required: true } // Changed to array of strings
 });
 
 const User = model<IUser>('User', userSchema);
