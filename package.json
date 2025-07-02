@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon --exec ts-node index.ts",
     "build": "npm install && tsc",
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "swagger": "ts-node swagger.ts"
   },
   "keywords": [],
   "author": "",
