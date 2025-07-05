@@ -1,0 +1,35 @@
+// ===== USERS =====
+
+// Local Host
+###
+GET http://localhost:8080/users/
+
+###
+GET http://localhost:8080/users/6830e82ded56c2256c29b109
+
+###
+POST http://localhost:8080/users/
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "email": "jane@example.com",
+    "password": "$2b$10$abcdef...",
+    "profile_img": "https://example.com/avatar/jane.jpg",
+    "character": ["Arannis", "Thorin"]
+}
+
+###
+PUT http://localhost:8080/users/683bb94d28dcc1547bb2a928
+Content-Type: application/json
+
+{
+    "name": "Updated Jane",
+    "email": "updatedjane@example.com",
+    "password": "$2b$10$updated...",
+    "profile_img": "https://example.com/avatar/updatedjane.jpg",
+    "character": ["Thorin", "Elora"]
+}
+
+###
+DELETE http://localhost:8080/users/683bb81928dcc1547bb2a922
