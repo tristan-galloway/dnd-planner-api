@@ -15,6 +15,7 @@ const doc = {
 const outputFile = './swagger.json';
 const endpointsFiles = [
   './routes/users.ts',
+  './routes/items.ts',
   './routes/characters.ts',
 ];
 
