@@ -39,10 +39,10 @@ DELETE http://localhost:8080/users/683bb81928dcc1547bb2a922
 
 // Local Host
 ###
-GET http://localhost:8080/campaigns/
+GET http://localhost:3000/campaigns/
 
 ###
-GET http://localhost:8080/campaigns/<id>
+GET http://localhost:3000/campaigns/<id>
 
 ###
 POST http://localhost:3000/campaigns/
@@ -59,7 +59,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/campaigns/<id>
+PUT http://localhost:3000/campaigns/<id>
 Content-Type: application/json
 
 {
@@ -73,4 +73,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/campaigns/<id>
+DELETE http://localhost:3000/campaigns/<id>
