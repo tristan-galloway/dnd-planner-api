@@ -45,7 +45,7 @@ GET http://localhost:8080/campaigns/
 GET http://localhost:8080/campaigns/<id>
 
 ###
-POST http://localhost:8080/campaigns/
+POST http://localhost:3000/campaigns/
 Content-Type: application/json
 
 {
