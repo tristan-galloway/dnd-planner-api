@@ -141,45 +141,70 @@
                       "class": { "type": "string", "example": "Wizard" },
                       "level": { "type": "integer", "example": 5 },
                       "background": { "type": "string", "example": "Sage" },
-                      "alignment": { "type": "string", "example": "Chaotic Good" },
+                      "alignment": { "type": "string", "example": "Neutral Good" },
                       "experiencePoints": { "type": "integer", "example": 6500 },
-                      "playerName": { "type": "string", "example": "Alice" },
-                      "abilities": { "type": "object", "example": { "strength": 8, "dexterity": 14 } }
+                      "playerName": { "type": "string", "example": "Jane Doe" },
+                      "abilities": {
+                        "type": "object",
+                        "properties": {
+                          "strength": { "type": "integer", "example": 8 },
+                          "dexterity": { "type": "integer", "example": 14 },
+                          "constitution": { "type": "integer", "example": 12 },
+                          "intelligence": { "type": "integer", "example": 18 },
+                          "wisdom": { "type": "integer", "example": 10 },
+                          "charisma": { "type": "integer", "example": 11 }
+                        }
+                      }
                     }
                   }
                 }
               }
             }
-          }
+          },
+          "400": { "description": "Invalid query parameters" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "post": {
         "tags": ["Characters"],
         "description": "Create a new character",
+        "responses": {
+          "201": { "description": "Character created" },
+          "400": { "description": "Missing or invalid character data" },
+          "500": { "description": "Internal Server Error" }
+        },
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["name", "race", "subrace", "class", "level", "background", "alignment", "experiencePoints", "playerName", "abilities"],
                 "properties": {
-                  "name": { "type": "string" },
-                  "race": { "type": "string" },
-                  "subrace": { "type": "string" },
-                  "class": { "type": "string" },
-                  "level": { "type": "integer" },
-                  "background": { "type": "string" },
-                  "alignment": { "type": "string" },
-                  "experiencePoints": { "type": "integer" },
-                  "playerName": { "type": "string" },
-                  "abilities": { "type": "object" }
+                  "name": { "type": "string", "example": "Thorin" },
+                  "race": { "type": "string", "example": "Dwarf" },
+                  "subrace": { "type": "string", "example": "Mountain Dwarf" },
+                  "class": { "type": "string", "example": "Fighter" },
+                  "level": { "type": "integer", "example": 3 },
+                  "background": { "type": "string", "example": "Soldier" },
+                  "alignment": { "type": "string", "example": "Lawful Good" },
+                  "experiencePoints": { "type": "integer", "example": 900 },
+                  "playerName": { "type": "string", "example": "John Smith" },
+                  "abilities": {
+                    "type": "object",
+                    "properties": {
+                      "strength": { "type": "integer", "example": 16 },
+                      "dexterity": { "type": "integer", "example": 12 },
+                      "constitution": { "type": "integer", "example": 14 },
+                      "intelligence": { "type": "integer", "example": 10 },
+                      "wisdom": { "type": "integer", "example": 11 },
+                      "charisma": { "type": "integer", "example": 8 }
+                    }
+                  }
                 }
               }
             }
           }
-        },
-        "responses": {
-          "201": { "description": "Character created" }
         }
       }
     },
@@ -187,26 +212,25 @@
       "get": {
         "tags": ["Characters"],
         "description": "Get a character by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Character ID" }],
         "responses": {
           "200": { "description": "Character found" },
-          "404": { "description": "Character not found" }
+          "400": { "description": "Invalid character ID format" },
+          "404": { "description": "Character not found" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "put": {
         "tags": ["Characters"],
         "description": "Update a character by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Character ID" }],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["name", "race", "subrace", "class", "level", "background", "alignment", "experiencePoints", "playerName", "abilities"],
                 "properties": {
                   "name": { "type": "string" },
                   "race": { "type": "string" },
@@ -217,76 +241,38 @@
                   "alignment": { "type": "string" },
                   "experiencePoints": { "type": "integer" },
                   "playerName": { "type": "string" },
-                  "abilities": { "type": "object" }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": { "description": "Character updated" },
-          "404": { "description": "Character not found" }
-        }
-      },
-      "delete": {
-        "tags": ["Characters"],
-        "description": "Delete a character by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
-        "responses": {
-          "200": { "description": "Character deleted" },
-          "404": { "description": "Character not found" }
-        }
-      }
-    },
-    "/items/": {
-      "get": {
-        "tags": ["Items"],
-        "description": "Get all items",
-        "responses": {
-          "200": {
-            "description": "List of items",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
+                  "abilities": {
                     "type": "object",
                     "properties": {
-                      "name": { "type": "string", "example": "Sword of Truth" },
-                      "value": { "type": "integer", "example": 1000 },
-                      "campain_discovered": { "type": "string", "example": "6657e82ded56c2256c29b108" },
-                      "description": { "type": "string", "example": "A legendary sword." }
+                      "strength": { "type": "integer" },
+                      "dexterity": { "type": "integer" },
+                      "constitution": { "type": "integer" },
+                      "intelligence": { "type": "integer" },
+                      "wisdom": { "type": "integer" },
+                      "charisma": { "type": "integer" }
                     }
                   }
                 }
               }
             }
           }
-        }
-      },
-      "post": {
-        "tags": ["Items"],
-        "description": "Create a new item",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "value": { "type": "integer" },
-                  "campain_discovered": { "type": "string" },
-                  "description": { "type": "string" }
-                }
-              }
-            }
-          }
         },
         "responses": {
-          "201": { "description": "Item created" }
+          "204": { "description": "User updated" },
+          "400": { "description": "Invalid user ID or update data" },
+          "404": { "description": "User not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "tags": ["Characters"],
+        "description": "Delete a character by ID",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Character ID" }],
+        "responses": {
+          "200": { "description": "Character deleted" },
+          "400": { "description": "Invalid character ID format" },
+          "404": { "description": "Character not found" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
