@@ -16,7 +16,9 @@
   "paths": {
     "/users/": {
       "get": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "description": "Get all users",
         "responses": {
           "200": {
@@ -28,11 +30,378 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "name": { "type": "string", "example": "Jane Doe" },
-                      "email": { "type": "string", "example": "jane@example.com" },
-                      "password": { "type": "string", "example": "$2b$10$abcdef..." },
-                      "profile_img": { "type": "string", "example": "https://example.com/avatar/jane.jpg" },
-                      "character": { "type": "array", "items": { "type": "string" }, "example": ["Arannis", "Thorin"] }
+                      "username": {
+                        "type": "string",
+                        "example": "janedoe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "janedoe@example.com"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "$2b$10$abcdef..."
+                      },
+                      "profile_img": {
+                        "type": "string",
+                        "example": "https://example.com/avatar/janedoe.jpg"
+                      },
+                      "character": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": [
+                          "Arannis",
+                          "Thorin"
+                        ]
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "username": "janedoe",
+                      "email": "janedoe@example.com",
+                      "password": "$2b$10$abcdef...",
+                      "profile_img": "https://example.com/avatar/janedoe.jpg",
+                      "character": [
+                        "Arannis",
+                        "Thorin"
+                      ]
+                    },
+                    {
+                      "username": "bobsmith",
+                      "email": "bobsmith@example.com",
+                      "password": "$2b$10$ghijkl...",
+                      "profile_img": "https://example.com/avatar/bobsmith.jpg",
+                      "character": [
+                        "Lia",
+                        "Gimli"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query parameters"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create a new user",
+        "responses": {
+          "201": {
+            "description": "User created"
+          },
+          "400": {
+            "description": "Missing or invalid user data"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "username": "string",
+                "email": "string",
+                "password": "string",
+                "avatarUrl": "string",
+                "fitnessGoals": "string",
+                "bio": "string",
+                "example": {
+                  "username": "janedoe",
+                  "email": "janedoe@example.com",
+                  "password": "password123",
+                  "avatarUrl": "https://example.com/avatar/janedoe.jpg",
+                  "fitnessGoals": "Get stronger",
+                  "bio": "Adventurer and fitness enthusiast"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get a user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "example": "janedoe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "janedoe@example.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "$2b$10$abcdef..."
+                    },
+                    "profile_img": {
+                      "type": "string",
+                      "example": "https://example.com/avatar/janedoe.jpg"
+                    },
+                    "character": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "Arannis",
+                        "Thorin"
+                      ]
+                    }
+                  },
+                  "example": {
+                    "username": "janedoe",
+                    "email": "janedoe@example.com",
+                    "password": "$2b$10$abcdef...",
+                    "profile_img": "https://example.com/avatar/janedoe.jpg",
+                    "character": [
+                      "Arannis",
+                      "Thorin"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user ID format"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Update a user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Invalid user ID or update data"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "janedoe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "janedoe@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "newpassword123"
+                  },
+                  "profile_img": {
+                    "type": "string",
+                    "example": "https://example.com/avatar/janedoe.jpg"
+                  },
+                  "character": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "Arannis",
+                      "Thorin"
+                    ]
+                  }
+                },
+                "example": {
+                  "username": "janedoe",
+                  "email": "janedoe@example.com",
+                  "password": "newpassword123",
+                  "profile_img": "https://example.com/avatar/janedoe.jpg",
+                  "character": [
+                    "Arannis",
+                    "Thorin"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Delete a user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully deleted"
+          },
+          "400": {
+            "description": "Invalid user ID format"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/characters/": {
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "Get all characters",
+        "responses": {
+          "200": {
+            "description": "List of characters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Arannis"
+                      },
+                      "race": {
+                        "type": "string",
+                        "example": "Elf"
+                      },
+                      "subrace": {
+                        "type": "string",
+                        "example": "High Elf"
+                      },
+                      "class": {
+                        "type": "string",
+                        "example": "Wizard"
+                      },
+                      "level": {
+                        "type": "integer",
+                        "example": 5
+                      },
+                      "background": {
+                        "type": "string",
+                        "example": "Sage"
+                      },
+                      "alignment": {
+                        "type": "string",
+                        "example": "Neutral Good"
+                      },
+                      "experiencePoints": {
+                        "type": "integer",
+                        "example": 6500
+                      },
+                      "playerName": {
+                        "type": "string",
+                        "example": "Jane Doe"
+                      },
+                      "abilities": {
+                        "type": "object",
+                        "properties": {
+                          "strength": {
+                            "type": "integer",
+                            "example": 8
+                          },
+                          "dexterity": {
+                            "type": "integer",
+                            "example": 14
+                          },
+                          "constitution": {
+                            "type": "integer",
+                            "example": 12
+                          },
+                          "intelligence": {
+                            "type": "integer",
+                            "example": 18
+                          },
+                          "wisdom": {
+                            "type": "integer",
+                            "example": 10
+                          },
+                          "charisma": {
+                            "type": "integer",
+                            "example": 11
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -45,133 +414,20 @@
         }
       },
       "post": {
-        "tags": ["Users"],
-        "description": "Create a new user",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "email": { "type": "string" },
-                  "password": { "type": "string" },
-                  "profile_img": { "type": "string" },
-                  "character": { "type": "array", "items": { "type": "string" } }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": { "description": "User created" }
-        }
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "tags": ["Users"],
-        "description": "Get a user by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        "tags": [
+          "Characters"
         ],
-        "responses": {
-          "200": { "description": "User found" },
-          "404": { "description": "User not found" }
-        }
-      },
-      "put": {
-        "tags": ["Users"],
-        "description": "Update a user by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "email": { "type": "string" },
-                  "password": { "type": "string" },
-                  "profile_img": { "type": "string" },
-                  "character": { "type": "array", "items": { "type": "string" } }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": { "description": "User updated" },
-          "404": { "description": "User not found" }
-        }
-      },
-      "delete": {
-        "tags": ["Users"],
-        "description": "Delete a user by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
-        "responses": {
-          "200": { "description": "User deleted" },
-          "404": { "description": "User not found" }
-        }
-      }
-    },
-    "/characters/": {
-      "get": {
-        "tags": ["Characters"],
-        "description": "Get all characters",
-        "responses": {
-          "200": {
-            "description": "List of characters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": { "type": "string", "example": "Arannis" },
-                      "race": { "type": "string", "example": "Elf" },
-                      "subrace": { "type": "string", "example": "High Elf" },
-                      "class": { "type": "string", "example": "Wizard" },
-                      "level": { "type": "integer", "example": 5 },
-                      "background": { "type": "string", "example": "Sage" },
-                      "alignment": { "type": "string", "example": "Neutral Good" },
-                      "experiencePoints": { "type": "integer", "example": 6500 },
-                      "playerName": { "type": "string", "example": "Jane Doe" },
-                      "abilities": {
-                        "type": "object",
-                        "properties": {
-                          "strength": { "type": "integer", "example": 8 },
-                          "dexterity": { "type": "integer", "example": 14 },
-                          "constitution": { "type": "integer", "example": 12 },
-                          "intelligence": { "type": "integer", "example": 18 },
-                          "wisdom": { "type": "integer", "example": 10 },
-                          "charisma": { "type": "integer", "example": 11 }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": { "description": "Invalid query parameters" },
-          "500": { "description": "Internal Server Error" }
-        }
-      },
-      "post": {
-        "tags": ["Characters"],
         "description": "Create a new character",
         "responses": {
-          "201": { "description": "Character created" },
-          "400": { "description": "Missing or invalid character data" },
-          "500": { "description": "Internal Server Error" }
+          "201": {
+            "description": "Character created"
+          },
+          "400": {
+            "description": "Missing or invalid character data"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         },
         "requestBody": {
           "required": true,
@@ -179,26 +435,82 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["name", "race", "subrace", "class", "level", "background", "alignment", "experiencePoints", "playerName", "abilities"],
+                "required": [
+                  "name",
+                  "race",
+                  "subrace",
+                  "class",
+                  "level",
+                  "background",
+                  "alignment",
+                  "experiencePoints",
+                  "playerName",
+                  "abilities"
+                ],
                 "properties": {
-                  "name": { "type": "string", "example": "Thorin" },
-                  "race": { "type": "string", "example": "Dwarf" },
-                  "subrace": { "type": "string", "example": "Mountain Dwarf" },
-                  "class": { "type": "string", "example": "Fighter" },
-                  "level": { "type": "integer", "example": 3 },
-                  "background": { "type": "string", "example": "Soldier" },
-                  "alignment": { "type": "string", "example": "Lawful Good" },
-                  "experiencePoints": { "type": "integer", "example": 900 },
-                  "playerName": { "type": "string", "example": "John Smith" },
+                  "name": {
+                    "type": "string",
+                    "example": "Thorin"
+                  },
+                  "race": {
+                    "type": "string",
+                    "example": "Dwarf"
+                  },
+                  "subrace": {
+                    "type": "string",
+                    "example": "Mountain Dwarf"
+                  },
+                  "class": {
+                    "type": "string",
+                    "example": "Fighter"
+                  },
+                  "level": {
+                    "type": "integer",
+                    "example": 3
+                  },
+                  "background": {
+                    "type": "string",
+                    "example": "Soldier"
+                  },
+                  "alignment": {
+                    "type": "string",
+                    "example": "Lawful Good"
+                  },
+                  "experiencePoints": {
+                    "type": "integer",
+                    "example": 900
+                  },
+                  "playerName": {
+                    "type": "string",
+                    "example": "John Smith"
+                  },
                   "abilities": {
                     "type": "object",
                     "properties": {
-                      "strength": { "type": "integer", "example": 16 },
-                      "dexterity": { "type": "integer", "example": 12 },
-                      "constitution": { "type": "integer", "example": 14 },
-                      "intelligence": { "type": "integer", "example": 10 },
-                      "wisdom": { "type": "integer", "example": 11 },
-                      "charisma": { "type": "integer", "example": 8 }
+                      "strength": {
+                        "type": "integer",
+                        "example": 16
+                      },
+                      "dexterity": {
+                        "type": "integer",
+                        "example": 12
+                      },
+                      "constitution": {
+                        "type": "integer",
+                        "example": 14
+                      },
+                      "intelligence": {
+                        "type": "integer",
+                        "example": 10
+                      },
+                      "wisdom": {
+                        "type": "integer",
+                        "example": 11
+                      },
+                      "charisma": {
+                        "type": "integer",
+                        "example": 8
+                      }
                     }
                   }
                 }
@@ -210,126 +522,278 @@
     },
     "/characters/{id}": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "Get a character by ID",
-        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Character ID" }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Character ID"
+          }
+        ],
         "responses": {
-          "200": { "description": "Character found" },
-          "400": { "description": "Invalid character ID format" },
-          "404": { "description": "Character not found" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "Character found"
+          },
+          "400": {
+            "description": "Invalid character ID format"
+          },
+          "404": {
+            "description": "Character not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
       "put": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "Update a character by ID",
-        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Character ID" }],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["name", "race", "subrace", "class", "level", "background", "alignment", "experiencePoints", "playerName", "abilities"],
-                "properties": {
-                  "name": { "type": "string" },
-                  "race": { "type": "string" },
-                  "subrace": { "type": "string" },
-                  "class": { "type": "string" },
-                  "level": { "type": "integer" },
-                  "background": { "type": "string" },
-                  "alignment": { "type": "string" },
-                  "experiencePoints": { "type": "integer" },
-                  "playerName": { "type": "string" },
-                  "abilities": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Character ID"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {}
+      },
+      "delete": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "Delete a character by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Character ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Character deleted"
+          },
+          "400": {
+            "description": "Invalid character ID format"
+          },
+          "404": {
+            "description": "Character not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/items/": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "description": "Get all items",
+        "responses": {
+          "200": {
+            "description": "List of items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
                     "type": "object",
                     "properties": {
-                      "strength": { "type": "integer" },
-                      "dexterity": { "type": "integer" },
-                      "constitution": { "type": "integer" },
-                      "intelligence": { "type": "integer" },
-                      "wisdom": { "type": "integer" },
-                      "charisma": { "type": "integer" }
+                      "name": {
+                        "type": "string",
+                        "example": "Sword of Truth"
+                      },
+                      "value": {
+                        "type": "integer",
+                        "example": 1000
+                      },
+                      "campain_discovered": {
+                        "type": "string",
+                        "example": "6657e82ded56c2256c29b108"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "A legendary sword."
+                      }
                     }
                   }
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "description": "Create a new item",
+        "responses": {
+          "201": {
+            "description": "Item created"
+          },
+          "400": {
+            "description": "Missing or invalid item data"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
-        "responses": {
-          "204": { "description": "User updated" },
-          "400": { "description": "Invalid user ID or update data" },
-          "404": { "description": "User not found" },
-          "500": { "description": "Internal Server Error" }
-        }
-      },
-      "delete": {
-        "tags": ["Characters"],
-        "description": "Delete a character by ID",
-        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Character ID" }],
-        "responses": {
-          "200": { "description": "Character deleted" },
-          "400": { "description": "Invalid character ID format" },
-          "404": { "description": "Character not found" },
-          "500": { "description": "Internal Server Error" }
-        }
-      }
-    },
-    "/items/{id}": {
-      "get": {
-        "tags": ["Items"],
-        "description": "Get an item by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
-        "responses": {
-          "200": { "description": "Item found" },
-          "404": { "description": "Item not found" }
-        }
-      },
-      "put": {
-        "tags": ["Items"],
-        "description": "Update an item by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "value": { "type": "integer" },
-                  "campain_discovered": { "type": "string" },
-                  "description": { "type": "string" }
-                }
+                "name": "string",
+                "value": "integer",
+                "campain_discovered": "string",
+                "description": "string"
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/items/{id}": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "description": "Get an item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Item ID"
+          }
+        ],
         "responses": {
-          "204": { "description": "Item updated" },
-          "404": { "description": "Item not found" }
+          "200": {
+            "description": "Item found"
+          },
+          "400": {
+            "description": "Invalid item ID format"
+          },
+          "404": {
+            "description": "Item not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "description": "Update an item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Item ID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Item updated"
+          },
+          "400": {
+            "description": "Invalid item ID or update data"
+          },
+          "404": {
+            "description": "Item not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "name": "string",
+                "value": "integer",
+                "campain_discovered": "string",
+                "description": "string"
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["Items"],
+        "tags": [
+          "Items"
+        ],
         "description": "Delete an item by ID",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Item ID"
+          }
         ],
         "responses": {
-          "200": { "description": "Item deleted" },
-          "404": { "description": "Item not found" }
+          "200": {
+            "description": "Item deleted"
+          },
+          "400": {
+            "description": "Invalid item ID format"
+          },
+          "404": {
+            "description": "Item not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
     "/campaigns/": {
       "get": {
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "Get all campaigns",
         "responses": {
           "200": {
@@ -341,90 +805,182 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "title": { "type": "string", "example": "The Lost Mines" },
-                      "setting": { "type": "string", "example": "Forgotten Realms" },
-                      "description": { "type": "string", "example": "A classic D&D adventure." },
-                      "session_notes": { "type": "array", "items": { "type": "string" }, "example": ["Session 1: Arrival", "Session 2: The Cave"] }
+                      "title": {
+                        "type": "string",
+                        "example": "The Shadow of Greymoor"
+                      },
+                      "setting": {
+                        "type": "string",
+                        "example": "Forgotten Realms"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "An epic quest across the Sword Coast"
+                      },
+                      "session_notes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": [
+                          "Session 1: The party met in Waterdeep",
+                          "Session 2: Ambushed on the road to Daggerford"
+                        ]
+                      }
                     }
                   }
                 }
               }
             }
+          },
+          "400": {
+            "description": "Invalid query parameters"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "Create a new campaign",
+        "responses": {
+          "201": {
+            "description": "Campaign created"
+          },
+          "400": {
+            "description": "Missing or invalid campaign data"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "title": { "type": "string" },
-                  "setting": { "type": "string" },
-                  "description": { "type": "string" },
-                  "session_notes": { "type": "array", "items": { "type": "string" } }
-                }
+                "title": "string",
+                "setting": "string",
+                "description": "string",
+                "session_notes": [
+                  "string"
+                ]
               }
             }
           }
-        },
-        "responses": {
-          "201": { "description": "Campaign created" }
         }
       }
     },
     "/campaigns/{id}": {
       "get": {
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "Get a campaign by ID",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Campaign ID"
+          }
         ],
         "responses": {
-          "200": { "description": "Campaign found" },
-          "404": { "description": "Campaign not found" }
+          "200": {
+            "description": "Campaign found"
+          },
+          "400": {
+            "description": "Invalid campaign ID format"
+          },
+          "404": {
+            "description": "Campaign not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
       "put": {
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "Update a campaign by ID",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Campaign ID"
+          }
         ],
+        "responses": {
+          "204": {
+            "description": "Campaign updated"
+          },
+          "400": {
+            "description": "Invalid campaign ID or update data"
+          },
+          "404": {
+            "description": "Campaign not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "title": { "type": "string" },
-                  "setting": { "type": "string" },
-                  "description": { "type": "string" },
-                  "session_notes": { "type": "array", "items": { "type": "string" } }
-                }
+                "title": "string",
+                "setting": "string",
+                "description": "string",
+                "session_notes": [
+                  "string"
+                ]
               }
             }
           }
-        },
-        "responses": {
-          "204": { "description": "Campaign updated" },
-          "404": { "description": "Campaign not found" }
         }
       },
       "delete": {
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "Delete a campaign by ID",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Campaign ID"
+          }
         ],
         "responses": {
-          "200": { "description": "Campaign deleted" },
-          "404": { "description": "Campaign not found" }
+          "200": {
+            "description": "Campaign deleted"
+          },
+          "400": {
+            "description": "Invalid campaign ID format"
+          },
+          "404": {
+            "description": "Campaign not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     }
