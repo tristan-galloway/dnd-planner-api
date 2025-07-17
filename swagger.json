@@ -866,7 +866,43 @@
         "description": "Create a new item",
         "responses": {
           "201": {
-            "description": "Item created"
+            "description": "Item created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "6657e82ded56c2256c29b109"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Sword of Truth"
+                    },
+                    "value": {
+                      "type": "integer",
+                      "example": 1000
+                    },
+                    "campain_discovered": {
+                      "type": "string",
+                      "example": "6657e82ded56c2256c29b108"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "A legendary sword."
+                    }
+                  }
+                },
+                "example": {
+                  "_id": "6657e82ded56c2256c29b109",
+                  "name": "Sword of Truth",
+                  "value": 1000,
+                  "campain_discovered": "6657e82ded56c2256c29b108",
+                  "description": "A legendary sword."
+                }
+              }
+            }
           },
           "400": {
             "description": "Missing or invalid item data"
@@ -880,10 +916,31 @@
           "content": {
             "application/json": {
               "schema": {
-                "name": "string",
-                "value": "integer",
-                "campain_discovered": "string",
-                "description": "string"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Sword of Truth"
+                  },
+                  "value": {
+                    "type": "integer",
+                    "example": 1000
+                  },
+                  "campain_discovered": {
+                    "type": "string",
+                    "example": "6657e82ded56c2256c29b108"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "A legendary sword."
+                  }
+                },
+                "example": {
+                  "name": "Sword of Truth",
+                  "value": 1000,
+                  "campain_discovered": "6657e82ded56c2256c29b108",
+                  "description": "A legendary sword."
+                }
               }
             }
           }
@@ -909,7 +966,43 @@
         ],
         "responses": {
           "200": {
-            "description": "Item found"
+            "description": "Item found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "6657e82ded56c2256c29b109"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Sword of Truth"
+                    },
+                    "value": {
+                      "type": "integer",
+                      "example": 1000
+                    },
+                    "campain_discovered": {
+                      "type": "string",
+                      "example": "6657e82ded56c2256c29b108"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "A legendary sword."
+                    }
+                  }
+                },
+                "example": {
+                  "_id": "6657e82ded56c2256c29b109",
+                  "name": "Sword of Truth",
+                  "value": 1000,
+                  "campain_discovered": "6657e82ded56c2256c29b108",
+                  "description": "A legendary sword."
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid item ID format"
@@ -940,7 +1033,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Item updated"
+            "description": "Item updated (no content)"
           },
           "400": {
             "description": "Invalid item ID or update data"
@@ -957,10 +1050,31 @@
           "content": {
             "application/json": {
               "schema": {
-                "name": "string",
-                "value": "integer",
-                "campain_discovered": "string",
-                "description": "string"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Sword of Destiny"
+                  },
+                  "value": {
+                    "type": "integer",
+                    "example": 1500
+                  },
+                  "campain_discovered": {
+                    "type": "string",
+                    "example": "6657e82ded56c2256c29b108"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "An even more legendary sword."
+                  }
+                },
+                "example": {
+                  "name": "Sword of Destiny",
+                  "value": 1500,
+                  "campain_discovered": "6657e82ded56c2256c29b108",
+                  "description": "An even more legendary sword."
+                }
               }
             }
           }
