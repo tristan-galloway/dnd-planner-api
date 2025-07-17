@@ -1,6 +1,24 @@
 import express from 'express';
-const router = express.Router();
 import * as characterController from '../controllers/characters';
+import { validationResult } from 'express-validator';
+import {
+  validateGetAllCharacters,
+  validateGetCharacter,
+  validateCreateCharacter,
+  validateUpdateCharacter,
+  validateDeleteCharacter
+} from '../middleware/charactersvalidation';
+
+const router = express.Router();
+
+const handleValidation: express.RequestHandler = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+    return;  // just return void here, not return the response object
+  }
+  next();
+};
 
 router.get(
   '/',
@@ -43,6 +61,8 @@ router.get(
      }
      #swagger.responses[500] = { description: 'Internal Server Error' }
   */
+  validateGetAllCharacters,  
+  handleValidation,
   characterController.getAllCharacters
 );
 
@@ -56,6 +76,8 @@ router.get(
      #swagger.responses[404] = { description: 'Character not found' }
      #swagger.responses[500] = { description: 'Internal Server Error' }
   */
+  validateGetCharacter,
+  handleValidation,
   characterController.getCharacter
 );
 
@@ -100,6 +122,8 @@ router.post(
      #swagger.responses[400] = { description: 'Missing or invalid character data' }
      #swagger.responses[500] = { description: 'Internal Server Error' }
   */
+  validateCreateCharacter,
+  handleValidation,
   characterController.createCharacter
 );
 
@@ -137,6 +161,8 @@ router.put(
      #swagger.responses[404] = { description: 'Character not found' }
      #swagger.responses[500] = { description: 'Internal Server Error' }
   */
+  validateUpdateCharacter,
+  handleValidation,
   characterController.updateCharacter
 );
 
@@ -150,6 +176,8 @@ router.delete(
      #swagger.responses[404] = { description: 'Character not found' }
      #swagger.responses[500] = { description: 'Internal Server Error' }
   */
+  validateDeleteCharacter,
+  handleValidation,
   characterController.deleteCharacter
 );
 

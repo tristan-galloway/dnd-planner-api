@@ -1,6 +1,24 @@
 import express from 'express';
-const router = express.Router();
 import * as usersController from '../controllers/users';
+import { validationResult } from 'express-validator';
+import {
+  validateGetAllUsers,
+  validateGetUser,
+  validateCreateUser,
+  validateUpdateUser,
+  validateDeleteUser
+} from '../middleware/uservalidation';
+
+const router = express.Router();
+
+const handleValidation: express.RequestHandler = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+    return;  // just return void here, not return the response object
+  }
+  next();
+};
 
 router.get(
     '/',
@@ -29,6 +47,8 @@ router.get(
        #swagger.responses[400] = { description: 'Invalid query parameters' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
     */
+    validateGetAllUsers,
+    handleValidation,
     usersController.getAll
 );
 
@@ -42,6 +62,8 @@ router.get(
        #swagger.responses[404] = { description: 'User not found' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
     */
+    validateGetUser,
+    handleValidation,
     usersController.getSingle
 );
 
@@ -68,6 +90,8 @@ router.post(
        #swagger.responses[400] = { description: 'Missing or invalid user data' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
     */
+    validateCreateUser,
+    handleValidation, 
     usersController.createUser
 );
 
@@ -95,6 +119,8 @@ router.put(
        #swagger.responses[404] = { description: 'User not found' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
     */
+    validateUpdateUser,
+    handleValidation,
     usersController.updateUser
 );
 
@@ -108,6 +134,8 @@ router.delete(
        #swagger.responses[404] = { description: 'User not found' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
     */
+    validateDeleteUser,
+    handleValidation,
     usersController.deleteUser
 );
 
