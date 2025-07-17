@@ -539,7 +539,100 @@
         ],
         "responses": {
           "200": {
-            "description": "Character found"
+            "description": "Character found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Arannis"
+                    },
+                    "race": {
+                      "type": "string",
+                      "example": "Elf"
+                    },
+                    "subrace": {
+                      "type": "string",
+                      "example": "High Elf"
+                    },
+                    "class": {
+                      "type": "string",
+                      "example": "Wizard"
+                    },
+                    "level": {
+                      "type": "integer",
+                      "example": 5
+                    },
+                    "background": {
+                      "type": "string",
+                      "example": "Sage"
+                    },
+                    "alignment": {
+                      "type": "string",
+                      "example": "Neutral Good"
+                    },
+                    "experiencePoints": {
+                      "type": "integer",
+                      "example": 6500
+                    },
+                    "playerName": {
+                      "type": "string",
+                      "example": "Jane Doe"
+                    },
+                    "abilities": {
+                      "type": "object",
+                      "properties": {
+                        "strength": {
+                          "type": "integer",
+                          "example": 8
+                        },
+                        "dexterity": {
+                          "type": "integer",
+                          "example": 14
+                        },
+                        "constitution": {
+                          "type": "integer",
+                          "example": 12
+                        },
+                        "intelligence": {
+                          "type": "integer",
+                          "example": 18
+                        },
+                        "wisdom": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "charisma": {
+                          "type": "integer",
+                          "example": 11
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "name": "Arannis",
+                    "race": "Elf",
+                    "subrace": "High Elf",
+                    "class": "Wizard",
+                    "level": 5,
+                    "background": "Sage",
+                    "alignment": "Neutral Good",
+                    "experiencePoints": 6500,
+                    "playerName": "Jane Doe",
+                    "abilities": {
+                      "strength": 8,
+                      "dexterity": 14,
+                      "constitution": 12,
+                      "intelligence": 18,
+                      "wisdom": 10,
+                      "charisma": 11
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid character ID format"
@@ -569,11 +662,127 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Invalid character ID or update data"
+          },
+          "404": {
+            "description": "Character not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
-        "requestBody": {}
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "race",
+                  "subrace",
+                  "class",
+                  "level",
+                  "background",
+                  "alignment",
+                  "experiencePoints",
+                  "playerName",
+                  "abilities"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Arannis"
+                  },
+                  "race": {
+                    "type": "string",
+                    "example": "Elf"
+                  },
+                  "subrace": {
+                    "type": "string",
+                    "example": "High Elf"
+                  },
+                  "class": {
+                    "type": "string",
+                    "example": "Wizard"
+                  },
+                  "level": {
+                    "type": "integer",
+                    "example": 6
+                  },
+                  "background": {
+                    "type": "string",
+                    "example": "Sage"
+                  },
+                  "alignment": {
+                    "type": "string",
+                    "example": "Neutral Good"
+                  },
+                  "experiencePoints": {
+                    "type": "integer",
+                    "example": 8000
+                  },
+                  "playerName": {
+                    "type": "string",
+                    "example": "Jane Doe"
+                  },
+                  "abilities": {
+                    "type": "object",
+                    "properties": {
+                      "strength": {
+                        "type": "integer",
+                        "example": 8
+                      },
+                      "dexterity": {
+                        "type": "integer",
+                        "example": 15
+                      },
+                      "constitution": {
+                        "type": "integer",
+                        "example": 13
+                      },
+                      "intelligence": {
+                        "type": "integer",
+                        "example": 19
+                      },
+                      "wisdom": {
+                        "type": "integer",
+                        "example": 11
+                      },
+                      "charisma": {
+                        "type": "integer",
+                        "example": 12
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "name": "Arannis",
+                  "race": "Elf",
+                  "subrace": "High Elf",
+                  "class": "Wizard",
+                  "level": 6,
+                  "background": "Sage",
+                  "alignment": "Neutral Good",
+                  "experiencePoints": 8000,
+                  "playerName": "Jane Doe",
+                  "abilities": {
+                    "strength": 8,
+                    "dexterity": 15,
+                    "constitution": 13,
+                    "intelligence": 19,
+                    "wisdom": 11,
+                    "charisma": 12
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "delete": {
         "tags": [
