@@ -40,7 +40,40 @@ router.get(
     /* #swagger.tags = ['Campaigns']
        #swagger.description = 'Get a campaign by ID'
        #swagger.parameters['id'] = { description: 'Campaign ID', type: 'string' }
-       #swagger.responses[200] = { description: 'Campaign found' }
+       #swagger.responses[200] = {
+         description: 'Campaign found',
+         content: {
+           "application/json": {
+             schema: {
+               type: "object",
+               properties: {
+                 _id: { type: "string", example: "6657e82ded56c2256c29b120" },
+                 title: { type: "string", example: "The Shadow of Greymoor" },
+                 setting: { type: "string", example: "Forgotten Realms" },
+                 description: { type: "string", example: "An epic quest across the Sword Coast" },
+                 session_notes: {
+                   type: "array",
+                   items: { type: "string" },
+                   example: [
+                     "Session 1: The party met in Waterdeep",
+                     "Session 2: Ambushed on the road to Daggerford"
+                   ]
+                 }
+               }
+             },
+             example: {
+               _id: "6657e82ded56c2256c29b120",
+               title: "The Shadow of Greymoor",
+               setting: "Forgotten Realms",
+               description: "An epic quest across the Sword Coast",
+               session_notes: [
+                 "Session 1: The party met in Waterdeep",
+                 "Session 2: Ambushed on the road to Daggerford"
+               ]
+             }
+           }
+         }
+       }
        #swagger.responses[400] = { description: 'Invalid campaign ID format' }
        #swagger.responses[404] = { description: 'Campaign not found' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
@@ -57,10 +90,29 @@ router.post(
          content: {
            "application/json": {
              schema: {
-               title: "string",
-               setting: "string",
-               description: "string",
-               session_notes: ["string"]
+               type: "object",
+               properties: {
+                 title: { type: "string", example: "The Shadow of Greymoor" },
+                 setting: { type: "string", example: "Forgotten Realms" },
+                 description: { type: "string", example: "An epic quest across the Sword Coast" },
+                 session_notes: {
+                   type: "array",
+                   items: { type: "string" },
+                   example: [
+                     "Session 1: The party met in Waterdeep",
+                     "Session 2: Ambushed on the road to Daggerford"
+                   ]
+                 }
+               },
+               example: {
+                 title: "The Shadow of Greymoor",
+                 setting: "Forgotten Realms",
+                 description: "An epic quest across the Sword Coast",
+                 session_notes: [
+                   "Session 1: The party met in Waterdeep",
+                   "Session 2: Ambushed on the road to Daggerford"
+                 ]
+               }
              }
            }
          }
@@ -82,10 +134,31 @@ router.put(
          content: {
            "application/json": {
              schema: {
-               title: "string",
-               setting: "string",
-               description: "string",
-               session_notes: ["string"]
+               type: "object",
+               properties: {
+                 title: { type: "string", example: "The Shadow of Greymoor - Revised" },
+                 setting: { type: "string", example: "Forgotten Realms" },
+                 description: { type: "string", example: "An epic quest with new twists." },
+                 session_notes: {
+                   type: "array",
+                   items: { type: "string" },
+                   example: [
+                     "Session 1: The party met in Waterdeep",
+                     "Session 2: Ambushed on the road to Daggerford",
+                     "Session 3: Discovered a hidden temple"
+                   ]
+                 }
+               },
+               example: {
+                 title: "The Shadow of Greymoor - Revised",
+                 setting: "Forgotten Realms",
+                 description: "An epic quest with new twists.",
+                 session_notes: [
+                   "Session 1: The party met in Waterdeep",
+                   "Session 2: Ambushed on the road to Daggerford",
+                   "Session 3: Discovered a hidden temple"
+                 ]
+               }
              }
            }
          }
