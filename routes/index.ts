@@ -8,6 +8,7 @@ import campaignRoutes from './campaigns';
 import itemsRoutes from './items';
 import authRoutes from './auth';
 import accountRoutes from './account';
+import homeRoute from './home';
 
 // Main application routes
 router.use('/users', usersRoutes);
@@ -16,6 +17,7 @@ router.use('/items', itemsRoutes);
 router.use('/auth', authRoutes);
 router.use('/account', accountRoutes);
 router.use('/campaigns', campaignRoutes);
+router.use('/', homeRoute);
 
 // Swagger documentation route
 router.use(
