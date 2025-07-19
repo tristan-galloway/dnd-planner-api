@@ -116,16 +116,21 @@
                 "username": "string",
                 "email": "string",
                 "password": "string",
-                "avatarUrl": "string",
-                "fitnessGoals": "string",
+                "profile_img": "string",
+                "character": [
+                  "string",
+                  "string"
+                ],
                 "bio": "string",
                 "example": {
                   "username": "janedoe",
                   "email": "janedoe@example.com",
-                  "password": "password123",
-                  "avatarUrl": "https://example.com/avatar/janedoe.jpg",
-                  "fitnessGoals": "Get stronger",
-                  "bio": "Adventurer and fitness enthusiast"
+                  "password": "$2b$10$abcdef...",
+                  "profile_img": "https://example.com/avatar/janedoe.jpg",
+                  "character": [
+                    "Arannis",
+                    "Thorin"
+                  ]
                 }
               }
             }
@@ -1108,6 +1113,56 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/account/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }

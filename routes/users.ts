@@ -96,16 +96,14 @@ router.post(
                "username": "string",
                "email": "string",
                "password": "string",
-               "avatarUrl": "string",
-               "fitnessGoals": "string",
-               "bio": "string",
+               "profile_img": "string",
+               "character": ["string", "string"],
                example: {
                  username: "janedoe",
                  email: "janedoe@example.com",
-                 password: "password123",
-                 avatarUrl: "https://example.com/avatar/janedoe.jpg",
-                 fitnessGoals: "Get stronger",
-                 bio: "Adventurer and fitness enthusiast"
+                 password: "$2b$10$abcdef...",
+                 profile_img: "https://example.com/avatar/janedoe.jpg",
+                 character: ["Arannis", "Thorin"]
                }
              }
            }
