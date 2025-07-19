@@ -11,9 +11,12 @@ import itemsRoutes from './items';
 router.use('/users', usersRoutes);
 router.use('/characters', charactersRoutes);
 router.use('/items', itemsRoutes);
+router.use('/campaigns', campaignRoutes);
 
 // Swagger documentation route
-router.use('/api-docs', swaggerRoutes);
-router.use('/campaigns', campaignRoutes);
+router.use(
+    '/api-docs',
+    // #swagger.ignore = true
+    swaggerRoutes);
 
 export default router;
