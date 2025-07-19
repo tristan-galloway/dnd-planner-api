@@ -15,17 +15,24 @@ router.get('/google',
 
 // OAuth callback route
 router.get('/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { failureRedirect: '/auth/login' }),
   (req, res) => {
-    // Successful authentication, redirect home or dashboard
-    res.redirect('/');
+    // Successful authentication, redirect to account page
+    res.redirect('/account');
   }
 );
 
 // Logout route
-router.get('/logout', (req, res) => {
-  req.logout(() => {
-    res.redirect('/login');
+router.get('/logout', (req, res, next) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+
+    req.session.destroy(function(err) {
+      if (err) return next(err);
+
+      res.clearCookie('connect.sid'); // removes the cookie from browser
+      res.redirect('/'); 
+    });
   });
 });
 
