@@ -18,7 +18,7 @@ async (accessToken: string, refreshToken: string, profile: Profile, done: Verify
     if (!user) {
       user = new User({
         googleId: profile.id,
-        name: profile.displayName,
+        username: profile.displayName,
         email: profile.emails && profile.emails[0].value,
         profile_img: profile.photos && profile.photos[0].value,
       });
