@@ -6,11 +6,13 @@ import charactersRoutes from './characters';
 import swaggerRoutes from './swagger';
 import campaignRoutes from './campaigns';
 import itemsRoutes from './items';
+import authRoutes from './auth';
 
 // Main application routes
 router.use('/users', usersRoutes);
 router.use('/characters', charactersRoutes);
 router.use('/items', itemsRoutes);
+router.use('/auth', authRoutes);
 
 // Swagger documentation route
 router.use('/api-docs', swaggerRoutes);
