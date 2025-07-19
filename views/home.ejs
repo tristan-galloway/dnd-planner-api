@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background-color: #1e1e1e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    }
+    nav button {
+      background-color: #3a3a3a;
+      border: none;
+      color: #e0e0e0;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    nav button:hover {
+      background-color: #575757;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <% if (isAuthenticated) { %>
+      <button onclick="location.href='/account'">Account</button>
+    <% } else { %>
+      <button onclick="location.href='/auth/login'">Login</button>
+    <% } %>
+  </nav>
+  <div class="content">
+    <div class="container">
+      <h1>Welcome to the D&D Tracker</h1>
+      <p>This is the home page of the application.</p>
+    </div>
+  </div>
+</body>
+</html>
