@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Campaign, { ICampaign } from '../models/campaigns';
+import Campaign, { ICampaign } from '../models/Campaigns';
 
 export const getAll = async (req: Request, res: Response): Promise<void> => {
   try {

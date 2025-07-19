@@ -29,7 +29,7 @@ export const getSingle = async (req: Request, res: Response): Promise<void> => {
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
   const requiredFields = [
-    "name",
+    "username",
     "email",
     "password",
     "profile_img",

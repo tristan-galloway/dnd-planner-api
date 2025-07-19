@@ -35,7 +35,30 @@ router.get(
   /* #swagger.tags = ['Items']
      #swagger.description = 'Get an item by ID'
      #swagger.parameters['id'] = { description: 'Item ID', type: 'string' }
-     #swagger.responses[200] = { description: 'Item found' }
+     #swagger.responses[200] = {
+       description: 'Item found',
+       content: {
+         "application/json": {
+           schema: {
+             type: "object",
+             properties: {
+               _id: { type: "string", example: "6657e82ded56c2256c29b109" },
+               name: { type: "string", example: "Sword of Truth" },
+               value: { type: "integer", example: 1000 },
+               campain_discovered: { type: "string", example: "6657e82ded56c2256c29b108" },
+               description: { type: "string", example: "A legendary sword." }
+             }
+           },
+           example: {
+             _id: "6657e82ded56c2256c29b109",
+             name: "Sword of Truth",
+             value: 1000,
+             campain_discovered: "6657e82ded56c2256c29b108",
+             description: "A legendary sword."
+           }
+         }
+       }
+     }
      #swagger.responses[400] = { description: 'Invalid item ID format' }
      #swagger.responses[404] = { description: 'Item not found' }
      #swagger.responses[500] = { description: 'Internal Server Error' }
@@ -52,15 +75,47 @@ router.post(
        content: {
          "application/json": {
            schema: {
-             name: "string",
-             value: "integer",
-             campain_discovered: "string",
-             description: "string"
+             type: "object",
+             properties: {
+               name: { type: "string", example: "Sword of Truth" },
+               value: { type: "integer", example: 1000 },
+               campain_discovered: { type: "string", example: "6657e82ded56c2256c29b108" },
+               description: { type: "string", example: "A legendary sword." }
+             },
+             example: {
+               name: "Sword of Truth",
+               value: 1000,
+               campain_discovered: "6657e82ded56c2256c29b108",
+               description: "A legendary sword."
+             }
            }
          }
        }
      }
-     #swagger.responses[201] = { description: 'Item created' }
+     #swagger.responses[201] = {
+       description: 'Item created',
+       content: {
+         "application/json": {
+           schema: {
+             type: "object",
+             properties: {
+               _id: { type: "string", example: "6657e82ded56c2256c29b109" },
+               name: { type: "string", example: "Sword of Truth" },
+               value: { type: "integer", example: 1000 },
+               campain_discovered: { type: "string", example: "6657e82ded56c2256c29b108" },
+               description: { type: "string", example: "A legendary sword." }
+             }
+           },
+           example: {
+             _id: "6657e82ded56c2256c29b109",
+             name: "Sword of Truth",
+             value: 1000,
+             campain_discovered: "6657e82ded56c2256c29b108",
+             description: "A legendary sword."
+           }
+         }
+       }
+     }
      #swagger.responses[400] = { description: 'Missing or invalid item data' }
      #swagger.responses[500] = { description: 'Internal Server Error' }
   */
@@ -77,15 +132,24 @@ router.put(
        content: {
          "application/json": {
            schema: {
-             name: "string",
-             value: "integer",
-             campain_discovered: "string",
-             description: "string"
+             type: "object",
+             properties: {
+               name: { type: "string", example: "Sword of Destiny" },
+               value: { type: "integer", example: 1500 },
+               campain_discovered: { type: "string", example: "6657e82ded56c2256c29b108" },
+               description: { type: "string", example: "An even more legendary sword." }
+             },
+             example: {
+               name: "Sword of Destiny",
+               value: 1500,
+               campain_discovered: "6657e82ded56c2256c29b108",
+               description: "An even more legendary sword."
+             }
            }
          }
        }
      }
-     #swagger.responses[204] = { description: 'Item updated' }
+     #swagger.responses[204] = { description: 'Item updated (no content)' }
      #swagger.responses[400] = { description: 'Invalid item ID or update data' }
      #swagger.responses[404] = { description: 'Item not found' }
      #swagger.responses[500] = { description: 'Internal Server Error' }

@@ -15,13 +15,29 @@ router.get(
                items: {
                  type: "object",
                  properties: {
-                   name: { type: "string", example: "Jane Doe" },
-                   email: { type: "string", example: "jane@example.com" },
+                   username: { type: "string", example: "janedoe" },
+                   email: { type: "string", example: "janedoe@example.com" },
                    password: { type: "string", example: "$2b$10$abcdef..." },
-                   profile_img: { type: "string", example: "https://example.com/avatar/jane.jpg" },
+                   profile_img: { type: "string", example: "https://example.com/avatar/janedoe.jpg" },
                    character: { type: "array", items: { type: "string" }, example: ["Arannis", "Thorin"] }
                  }
-               }
+               },
+               example: [
+                 {
+                   username: "janedoe",
+                   email: "janedoe@example.com",
+                   password: "$2b$10$abcdef...",
+                   profile_img: "https://example.com/avatar/janedoe.jpg",
+                   character: ["Arannis", "Thorin"]
+                 },
+                 {
+                   username: "bobsmith",
+                   email: "bobsmith@example.com",
+                   password: "$2b$10$ghijkl...",
+                   profile_img: "https://example.com/avatar/bobsmith.jpg",
+                   character: ["Lia", "Gimli"]
+                 }
+               ]
              }
            }
          }
@@ -37,7 +53,30 @@ router.get(
     /* #swagger.tags = ['Users']
        #swagger.description = 'Get a user by ID'
        #swagger.parameters['id'] = { description: 'User ID', type: 'string' }
-       #swagger.responses[200] = { description: 'User found' }
+       #swagger.responses[200] = {
+         description: 'User found',
+         content: {
+           "application/json": {
+             schema: {
+               type: "object",
+               properties: {
+                 username: { type: "string", example: "janedoe" },
+                 email: { type: "string", example: "janedoe@example.com" },
+                 password: { type: "string", example: "$2b$10$abcdef..." },
+                 profile_img: { type: "string", example: "https://example.com/avatar/janedoe.jpg" },
+                 character: { type: "array", items: { type: "string" }, example: ["Arannis", "Thorin"] }
+               },
+               example: {
+                 username: "janedoe",
+                 email: "janedoe@example.com",
+                 password: "$2b$10$abcdef...",
+                 profile_img: "https://example.com/avatar/janedoe.jpg",
+                 character: ["Arannis", "Thorin"]
+               }
+             }
+           }
+         }
+       }
        #swagger.responses[400] = { description: 'Invalid user ID format' }
        #swagger.responses[404] = { description: 'User not found' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
@@ -59,7 +98,15 @@ router.post(
                "password": "string",
                "avatarUrl": "string",
                "fitnessGoals": "string",
-               "bio": "string"
+               "bio": "string",
+               example: {
+                 username: "janedoe",
+                 email: "janedoe@example.com",
+                 password: "password123",
+                 avatarUrl: "https://example.com/avatar/janedoe.jpg",
+                 fitnessGoals: "Get stronger",
+                 bio: "Adventurer and fitness enthusiast"
+               }
              }
            }
          }
@@ -81,16 +128,25 @@ router.put(
          content: {
            "application/json": {
              schema: {
-               "username": "string",
-               "email": "string",
-               "avatarUrl": "string",
-               "fitnessGoals": "string",
-               "bio": "string"
+               type: "object",
+               properties: {
+                 username: { type: "string", example: "janedoe" },
+                 email: { type: "string", example: "janedoe@example.com" },
+                 password: { type: "string", example: "newpassword123" },
+                 profile_img: { type: "string", example: "https://example.com/avatar/janedoe.jpg" },
+                 character: { type: "array", items: { type: "string" }, example: ["Arannis", "Thorin"] }
+               },
+               example: {
+                 username: "janedoe",
+                 email: "janedoe@example.com",
+                 password: "newpassword123",
+                 profile_img: "https://example.com/avatar/janedoe.jpg",
+                 character: ["Arannis", "Thorin"]
+               }
              }
            }
          }
        }
-       #swagger.responses[204] = { description: 'User updated' }
        #swagger.responses[400] = { description: 'Invalid user ID or update data' }
        #swagger.responses[404] = { description: 'User not found' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
@@ -103,7 +159,7 @@ router.delete(
     /* #swagger.tags = ['Users']
        #swagger.description = 'Delete a user by ID'
        #swagger.parameters['id'] = { description: 'User ID', type: 'string' }
-       #swagger.responses[200] = { description: 'User deleted' }
+       #swagger.responses[200] = { description: 'User successfully deleted' }
        #swagger.responses[400] = { description: 'Invalid user ID format' }
        #swagger.responses[404] = { description: 'User not found' }
        #swagger.responses[500] = { description: 'Internal Server Error' }
